@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-hello-world',
@@ -12,10 +13,16 @@ export class HelloWorldComponent implements OnInit {
   operator = "";
   title = 'Card title';
   showCard=true;
+  myVar:Array<boolean>;
+  myObj = {
+    key1: "value1"
+  };
+  
 
   constructor() { }
 
   ngOnInit(): void {
+    console.log(environment.test);
   }
 
   getInputName(value:string){
