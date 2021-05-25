@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { roundedDecorator } from '../../decorators/roundedDecorator';
 import { environment } from '../../../environments/environment';
+import { execTimeDecorator } from '../../decorators/execTimeDecorator';
 
 @Component({
   selector: 'app-hello-world',
@@ -18,6 +20,8 @@ export class HelloWorldComponent implements OnInit {
     key1: "value1"
   };
   
+  @roundedDecorator(10) ceilNum1:number = 5.3;
+  @roundedDecorator() ceilNum2:number;
 
   constructor() { }
 
@@ -103,12 +107,25 @@ export class HelloWorldComponent implements OnInit {
     }
   }
 
+  @execTimeDecorator
   showResult(num1,num2,operation){
     this[operation](num1,num2);
+    //this.longRunningMethod();
   }
 
   toggleCard(){
     this.showCard= !this.showCard;
+  }
+
+  longRunningMethod() {
+    let arrayCount = 5000;
+    let dynamicArrays = [];
+    for(let j=0;j<arrayCount;j++)
+        dynamicArrays[j] = [];
+    let lastLongI = 1;
+    for(let i=0;i<5000;i++){
+        for(let j=0;j<arrayCount;j++) dynamicArrays[j][i] = i;
+    }
   }
 
 }

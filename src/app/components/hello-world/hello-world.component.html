@@ -2,15 +2,25 @@
 <p>Hello {{name}} !</p>
 <button (click)="getInputName(inputName.value)">Click Me</button>
 
+<div class="container mb-3">
+    <div class="row">
+        <div class="col">
+            <div class="p">ceil num 1 : {{ ceilNum1 }}</div>
+            <div class="p">ceil num 2 : {{ ceilNum2 }}</div>
+            <input type="number" [(ngModel)]="ceilNum1">
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col bg-light text-success">
             <input type="number" class="form-control" placeholder="first number" #firstNumber>
         </div>
-        <div class="col bg-primary text-white">
+        <div class="col text-white">
             {{ operator }}
         </div>
-        <div class="col bg-secondary text-white">
+        <div class="col text-white">
             <input type="number" class="form-control" placeholder="second number" #secondNumber>
         </div>
     </div>

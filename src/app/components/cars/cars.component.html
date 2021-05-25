@@ -1,3 +1,14 @@
+<div class="container">
+  <div class="card my-5">
+    <div class="card-body">
+      <div class="input-group mb-3">
+        <span class="input-group-text" (click)="search()"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="searchText">
+        <span class="input-group-text" (click)="clearSearchBox()"><i class="fa fa-times"></i></span>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="container text-end">
   <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" (click)="toggleCard()">
@@ -9,7 +20,7 @@
 
 <div class="container mt-3" *ngIf="showCard">
   <div class="row">
-    <div class="col-12 col-sm-4 mb-3" *ngFor="let car of carList">
+    <div class="col-12 col-sm-4 mb-3" *ngFor="let car of filteredCarList">
       <div class="card">
         <img [src]="car.image_car" class="card-img-top" alt="{{car.name}}">
         <div class="card-body">
@@ -34,7 +45,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let car of carList; let i = index">
+          <tr *ngFor="let car of filteredCarList; let i = index">
             <th scope="row">{{ i+1 }}</th>
             <td>{{ car.name }}</td>
             <td>{{car.body_type}}</td>
