@@ -11,6 +11,7 @@ import { Car } from '../../models/car';
 export class CarsComponent implements OnInit {
 
   //carList:Car[] = [];
+  showCard=true;
 
   constructor(
     public dataService: DataService,
@@ -23,6 +24,14 @@ export class CarsComponent implements OnInit {
 
   deleteCar(ref){
     this.carList = this.carList.filter(car => car.ref != ref);
+  }
+
+  toggleCard(){
+    this.showCard = true;
+  }
+
+  toggleTable(){
+    this.showCard = false;
   }
 
   set carList(value){

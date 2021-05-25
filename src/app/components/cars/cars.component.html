@@ -1,4 +1,28 @@
-<div class="container">
+
+<div class="container text-end">
+  <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" (click)="toggleCard()">
+    <i class="fa fa-th pe-2"></i>
+    Card
+  </button>
+  <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" aria-pressed="true" (click)="toggleTable()">Table</button>
+</div>
+
+<div class="container mt-3" *ngIf="showCard">
+  <div class="row">
+    <div class="col-12 col-sm-4 mb-3" *ngFor="let car of carList">
+      <div class="card">
+        <img [src]="car.image_car" class="card-img-top" alt="{{car.name}}">
+        <div class="card-body">
+          <h5 class="card-title">{{ car.name }}</h5>
+          <p class="card-text">{{car.desc_excerpt}}</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="!showCard">
     <table class="table table-striped table-dark table-hover mt-2">
         <thead>
           <tr>
