@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-car-form',
@@ -7,9 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CarFormComponent implements OnInit {
 
-  constructor() { }
+  carForm: FormGroup;
+  constructor(
+    public formBuilder: FormBuilder
+  ) { }
 
   ngOnInit(): void {
+    this.carForm = this.formBuilder.group({
+      ref:['', Validators.required],
+      name:['', Validators.required],
+      body_type:['', Validators.required],
+      engine:['', Validators.required],
+      mileage:['', Validators.required],
+      fuel_type:['', Validators.required],
+      transmission:['', Validators.required],
+      door_count:['', Validators.required],
+      image_car:['', Validators.required],
+      price:['', Validators.required],
+      description:['', Validators.required],
+      desc_excerpt:['', Validators.required],
+      date_online:['', Validators.required],
+      date_offline:['', Validators.required],
+      currency:['', Validators.required],
+      contact_phone:['', Validators.required],
+      contact_email:['', Validators.required, Validators.email]
+    });
+  }
+
+  addCar(){
+    console.log('carForm:', this.carForm.value );
+
   }
 
 }
