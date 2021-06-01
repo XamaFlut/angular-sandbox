@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../../services/data.service';
 import { StorageService } from '../../services/storage.service';
 import { Car } from '../../models/car';
+import { SettingsService } from '../../services/settings.service';
 
 @Component({
   selector: 'app-cars',
@@ -13,15 +14,25 @@ export class CarsComponent implements OnInit {
   filteredCarList:Car[] = [];
   showCard=true;
   searchText:string;
+  toModal = "Vat 18%";
+  currentTheme = 'light';
 
   constructor(
     public dataService: DataService,
-    public storageService: StorageService) { 
+    public storageService: StorageService,
+    public settingsService: SettingsService
+    ) { 
   }
 
   ngOnInit(): void {
+    this.currentTheme = this.settingsService.theme;
+    this.settingsService.outsetTheme.subscribe(result => {
+      this.currentTheme = result;
+    });
     this.carList == undefined || this.carList.length == 0? this.dataService.seedCars() : "";
     this.filteredCarList = this.carList;
+    this.arrayMap();
+    this.arrayReducer();
   }
 
   deleteCar(ref){
@@ -58,6 +69,27 @@ export class CarsComponent implements OnInit {
 
   clearSearchBox(){
     this.searchText = "";
-    this.filteredCarList = this.carList; 
+    this.search();
+  }
+
+  arrayMap(){
+    const myArray=[1,2,3,4,5];
+    const mapped = myArray.map(x => x*x);
+    console.log("Mapped", mapped);
+  }
+
+  arrayReducer(){
+    const myArray=[1,2,3,4,5];
+    const reduced = myArray.reduce((accumulator, currentValue)=> accumulator+currentValue);
+    console.log("reduced", reduced);
+
+    const name = "PRASHANT";
+    const result = name.split('').reverse().join('');
+    console.log("result: ", result);
+
+    const phrase = "Ler dezener la.. Christophe pas p laiss manzer, Mo faim.";
+    const final = phrase.split(".").join();
+    console.log("final: ", final);
+
   }
 }

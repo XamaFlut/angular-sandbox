@@ -3,28 +3,49 @@
     <div class="card-body">
       <div class="input-group mb-3">
         <span class="input-group-text" (click)="search()"><i class="fa fa-search"></i></span>
-        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="searchText">
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" [(ngModel)]="searchText" (keyup)="search()">
         <span class="input-group-text" (click)="clearSearchBox()"><i class="fa fa-times"></i></span>
       </div>
     </div>
   </div>
 </div>
-
-<div class="container text-end">
-  <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" (click)="toggleCard()">
-    <i class="fa fa-th pe-2"></i>
-    Card
-  </button>
-  <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" aria-pressed="true" (click)="toggleTable()">Table</button>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-success btn-sm" [routerLink]="['/car/add']">
+        <i class="fa fa-plus me-2"></i>
+        Add Car
+      </button>
+    </div>
+    <div class="col text-end">
+      <button type="button" class="btn btn-primary me-2" data-bs-toggle="button" autocomplete="off" (click)="toggleCard()">
+        <i class="fa fa-id-card pe-2"></i>
+        Card
+      </button>
+      <button type="button" class="btn btn-primary" data-bs-toggle="button" autocomplete="off" aria-pressed="true" (click)="toggleTable()">
+        <i class="fa fa-th pe-2"></i>
+        Table
+      </button>
+    </div>
+  </div>
+  
 </div>
 
 <div class="container mt-3" *ngIf="showCard">
   <div class="row">
-    <div class="col-12 col-sm-4 mb-3" *ngFor="let car of filteredCarList">
-      <div class="card">
+    <div class="col-12 col-sm-4 mb-3" *ngFor="let car of filteredCarList; let i = index">
+      <div class="card" [ngClass]="{
+        'bg-dark text-white':currentTheme == 'dark',
+        'bg-danger text-light':currentTheme == 'danger'
+      }">
         <img [src]="car.image_car" class="card-img-top" alt="{{car.name}}">
         <div class="card-body">
-          <h5 class="card-title">{{ car.name }}</h5>
+          <ng-template #carPrice>
+            <p class="text-success">{{ car.price }}</p>
+          </ng-template>
+          <h5 class="card-title" [tooltip]="carPrice">{{ car.name }}
+            <app-modal [carDetails]="car"></app-modal>
+          </h5>
           <p class="card-text">{{car.desc_excerpt}}</p>
           <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
@@ -51,7 +72,8 @@
             <td>{{car.body_type}}</td>
             <td>{{car.price}}</td>
             <td> 
-                <button class="btn btn-danger btn-sm" (click)="deleteCar(car.ref)">Delete</button> 
+                <button class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.ref)">Delete</button> 
+                <app-modal [carDetails]="car"></app-modal>
             </td>
           </tr>
         </tbody>
