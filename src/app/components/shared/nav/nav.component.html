@@ -25,10 +25,17 @@
             <a class="nav-link" [routerLink]="['profile']" routerLinkActive="active">Profile</a>
           </li>
         </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" [formGroup]="loginForm" *ngIf="!username">
+          <input class="form-control me-2" type="text" placeholder="Email" aria-label="Email" formControlName="email">
+          <input class="form-control me-2" type="password" placeholder="Password" aria-label="Password" formControlName="password">
+          <button class="btn btn-outline-success" type="submit" (click)="signin()" [disabled]="loginForm.invalid">
+            Login
+          </button>
         </form>
+        <div class="nav-item" *ngIf="username">
+          <span>Welcome {{ username }}!</span>
+          <button class="btn btn-outline-danger ms-2" (click)="logout()"><i class="fa fa-power-off"></i></button>
+        </div>
       </div>
     </div>
   </nav>

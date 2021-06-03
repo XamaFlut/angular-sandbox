@@ -9,7 +9,8 @@ const routes: Routes = [
   { path: 'hello', component: HelloWorldComponent },
   { path: 'car', component: CarsComponent},
   { path: 'profile', component: UserComponent},
-  { path: 'car/add', component: CarFormComponent}
+  { path: 'car/add', component: CarFormComponent},
+  { path: 'car/edit/:slug', component: CarFormComponent}
 ];
 
 @NgModule({

@@ -3,6 +3,7 @@ import { DataService } from '../../services/data.service';
 import { StorageService } from '../../services/storage.service';
 import { Car } from '../../models/car';
 import { SettingsService } from '../../services/settings.service';
+import { ApiService } from 'src/app/services/api.service';
 
 @Component({
   selector: 'app-cars',
@@ -11,6 +12,7 @@ import { SettingsService } from '../../services/settings.service';
 })
 export class CarsComponent implements OnInit {
 
+  carList: Car[];
   filteredCarList:Car[] = [];
   showCard=true;
   searchText:string;
@@ -20,7 +22,8 @@ export class CarsComponent implements OnInit {
   constructor(
     public dataService: DataService,
     public storageService: StorageService,
-    public settingsService: SettingsService
+    public settingsService: SettingsService,
+    public apiService: ApiService
     ) { 
   }
 
@@ -29,10 +32,14 @@ export class CarsComponent implements OnInit {
     this.settingsService.outsetTheme.subscribe(result => {
       this.currentTheme = result;
     });
-    this.carList == undefined || this.carList.length == 0? this.dataService.seedCars() : "";
-    this.filteredCarList = this.carList;
-    this.arrayMap();
-    this.arrayReducer();
+    
+    // this.arrayMap();
+    // this.arrayReducer();
+    this.apiService.request('carList', 'get').subscribe( result => {
+      console.log(result);
+      this.carList = result['data'];
+      this.filteredCarList = this.carList;
+    });
   }
 
   deleteCar(ref){
@@ -48,13 +55,13 @@ export class CarsComponent implements OnInit {
     this.showCard = false;
   }
 
-  set carList(value){
-    this.storageService.set("Cars", value);
-  }
+  // set carList(value){
+  //   this.storageService.set("Cars", value);
+  // }
 
-  get carList():Car[]{
-    return this.storageService.get("Cars");
-  }
+  // get carList():Car[]{
+  //   return this.storageService.get("Cars");
+  // }
 
   search(){
     const searchTextLower = this.searchText.toLowerCase();

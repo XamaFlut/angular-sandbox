@@ -1,8 +1,15 @@
 <div class="container">
     <div class="card">
         <div class="card-header">
-            <i class="fa fa-plus me-2"></i>
-            Add Car Details
+            <span *ngIf="carSlug">
+                <i class="fa fa-pencil me-2"></i>
+                Edit
+            </span>
+            <span *ngIf="!carSlug">
+                <i class="fa fa-plus me-2"></i>
+                Add
+            </span>
+            Car Details
         </div>
         <div class="card-body">
             <form [formGroup]="carForm">
@@ -188,11 +195,15 @@
             
                 <div class="form-group row mt-4">
                     <div class="col-sm-12 text-end">
-                        <button class="btn btn-success" (click)="addCar()">
+                        <button class="btn btn-success" *ngIf="!carSlug" (click)="addCar()" [disabled]="carForm.invalid">
                             <i class="fa fa-plus me-2"></i>
                             Add
                         </button>
-                        <button class="btn btn-danger ms-3">
+                        <button class="btn btn-success" *ngIf="carSlug" [disabled]="carForm.invalid">
+                            <i class="fa fa-pencil me-2"></i>
+                            Edit
+                        </button>
+                        <button class="btn btn-danger ms-3" [routerLink]="['/car']">
                             <i class="fa fa-times me-2"></i>
                             Cancel
                         </button>

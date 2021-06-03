@@ -74,6 +74,9 @@
             <td> 
                 <button class="btn btn-danger btn-sm me-2" (click)="deleteCar(car.ref)">Delete</button> 
                 <app-modal [carDetails]="car"></app-modal>
+                <button class="btn btn-primary btn-sm ms-2" [tooltip]="'Edit'" [routerLink]="['/car/edit/',car.slug]">
+                  <i class="fa fa-pencil"></i>
+                </button>
             </td>
           </tr>
         </tbody>
