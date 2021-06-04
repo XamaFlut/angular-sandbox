@@ -15,21 +15,12 @@ export class ApiService {
     carList: `${this.baseUrl}car/list`,
     addCar: `${this.baseUrl}car/add-car`,
     carDetails: (slug) => `${this.baseUrl}car/${slug}`,
-    userSignIn: `${this.baseUrl}car/signin`
+    userSignIn: `${this.baseUrl}user/signin`,
+    carEdit: (slug) => `${this.baseUrl}car/edit/${slug}`
   }
-
-  // getCarList(){
-  //   return this.http.get(`${this.baseUrl}car/list`);
-  // }
-
-  // addCar(carDetails){
-  //   return this.http.post(`${this.baseUrl}car/add-car`, carDetails);
-  // }
 
   request(url: endpointType, method, urlParams?, payload?){
     const requestUrl = (!urlParams)? this.endpoints[url]: this.endpoints[url](urlParams);
-    
-    
     return !payload? 
     this.http[method](requestUrl): 
     this.http[method](requestUrl, payload);
@@ -37,4 +28,9 @@ export class ApiService {
 
 }
 
-export type endpointType = "carList" | "addCar" | "userSignIn" | "carDetails";
+export type endpointType = 
+  "carList" | 
+  "addCar" | 
+  "userSignIn" | 
+  "carDetails" |
+  "carEdit";

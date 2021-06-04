@@ -199,7 +199,7 @@
                             <i class="fa fa-plus me-2"></i>
                             Add
                         </button>
-                        <button class="btn btn-success" *ngIf="carSlug" [disabled]="carForm.invalid">
+                        <button class="btn btn-success" *ngIf="carSlug" [disabled]="carForm.invalid" (click)="editCar()">
                             <i class="fa fa-pencil me-2"></i>
                             Edit
                         </button>

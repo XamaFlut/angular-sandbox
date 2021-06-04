@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Car } from '../../../models/car';
 import { StorageService } from '../../../services/storage.service';
 import Swal from 'sweetalert2';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -22,7 +22,8 @@ export class CarFormComponent implements OnInit {
     public formBuilder: FormBuilder,
     public storageService: StorageService,
     public activatedRoute: ActivatedRoute,
-    public apiService: ApiService
+    public apiService: ApiService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -63,6 +64,14 @@ export class CarFormComponent implements OnInit {
   getCar(){
     this.apiService.request('carDetails', 'get', this.carSlug).subscribe(result=>{
       this.carForm.patchValue(result);
+    });
+  }
+
+  editCar(){
+    this.apiService.request('carEdit', 'put', this.carSlug, this.carForm.value).subscribe(result => {
+      Swal.fire('Success', `${result.name} has been updated`, 'success').then(()=>{
+        this.router.navigateByUrl('/car');
+      });
     });
   }
 }
