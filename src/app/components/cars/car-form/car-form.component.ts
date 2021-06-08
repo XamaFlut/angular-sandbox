@@ -64,14 +64,55 @@ export class CarFormComponent implements OnInit {
   getCar(){
     this.apiService.request('carDetails', 'get', this.carSlug).subscribe(result=>{
       this.carForm.patchValue(result);
+      this.carDetails = result;
     });
   }
 
   editCar(){
-    this.apiService.request('carEdit', 'put', this.carSlug, this.carForm.value).subscribe(result => {
-      Swal.fire('Success', `${result.name} has been updated`, 'success').then(()=>{
-        this.router.navigateByUrl('/car');
-      });
+    this.apiService.request('carEdit', 'put', this.carSlug, this.carForm.value).subscribe(async (car) => {
+      if(car){
+        try{
+          const { value: value } = await Swal.fire('Success', `${car.name} has been updated`, 'success');
+          if(value){
+            this.router.navigate(['/car']);
+          }
+        } catch(error){
+          console.error(error);
+        }
+
+        // Swal.fire('Success', `${result.name} has been updated`, 'success').then((value)=>{
+        //   if(value.value){
+        //     this.router.navigate(['/car']);
+        //   }
+        // });
+      }
+    }, error => {
+      console.error('Edit car error: ', error);
     });
+  }
+
+  uploadImage(event) {
+    console.log('Event of car image: ', event.target.files[0]);
+    const fileUpload = event.target.files[0];
+    this.getImageUrl(fileUpload);
+  }
+
+  uploadFileDirective(event){
+    console.log('Event from directive', event);
+    const fileUpload = event[0];
+    this.getImageUrl(fileUpload);
+  }
+
+  getImageUrl(fileUpload){
+    if(fileUpload){
+      const formData: FormData = new FormData();
+      formData.append('image', fileUpload, fileUpload.name);
+
+      this.apiService.request('imageUpload', 'post', null, formData).subscribe(result => {
+        console.log('Result of image upload', result);
+        this.carForm.controls.image_car.setValue(result['url']);
+        this.carDetails.image_car = result['url'];
+      });
+    }
   }
 }

@@ -16,7 +16,8 @@ export class ApiService {
     addCar: `${this.baseUrl}car/add-car`,
     carDetails: (slug) => `${this.baseUrl}car/${slug}`,
     userSignIn: `${this.baseUrl}user/signin`,
-    carEdit: (slug) => `${this.baseUrl}car/edit/${slug}`
+    carEdit: (slug) => `${this.baseUrl}car/edit/${slug}`,
+    imageUpload: `${this.baseUrl}car/img-upload`
   }
 
   request(url: endpointType, method, urlParams?, payload?){
@@ -33,4 +34,5 @@ export type endpointType =
   "addCar" | 
   "userSignIn" | 
   "carDetails" |
-  "carEdit";
+  "carEdit" |
+  "imageUpload";

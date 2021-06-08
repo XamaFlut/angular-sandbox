@@ -114,10 +114,24 @@
                 <div class="form-group row">
                     <label for="image_car" class="col-sm-2 col-form-label text-right">Image<sup class="text-danger">*</sup> : </label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control" id="image_car" formControlName="image_car" [ngClass]="{'is-invalid': carForm.controls.image_car.dirty && carForm.controls.image_car.invalid}">
-                    <span class="text-danger" *ngIf="carForm.controls.image_car.dirty && carForm.controls.image_car.invalid">
-                        Image is required.
-                    </span>
+                        <div class="row">
+                            <div class="col-8">
+                                <input type="file" class="form-control" id="image_car" 
+                                    [ngClass]="{'is-invalid': carForm.controls.image_car.dirty && carForm.controls.image_car.invalid}"
+                                    (change)="uploadImage($event)"
+                                    >
+                                <span class="text-danger" *ngIf="carForm.controls.image_car.dirty && carForm.controls.image_car.invalid">
+                                    Image is required.
+                                </span>
+                                <div class="card-light dotted" appUpload (onFileDropped)="uploadFileDirective($event)">
+                                    Drop a File
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="carDetails?.image_car" alt="" class="img-fluid">
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
                 <div class="form-group row">

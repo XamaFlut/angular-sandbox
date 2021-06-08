@@ -3,7 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,7 +13,10 @@ import { NavComponent } from './components/shared/nav/nav.component';
 import { ModalComponent } from './components/shared/modal/modal.component';
 import { UserComponent } from './components/user/user.component';
 import { CarFormComponent } from './components/cars/car-form/car-form.component';
-import { TokenInterceptor } from './interceptors/token.interceptor';
+import { NgxLoadingModule } from 'ngx-loading';
+import { InterceptorsProviders } from './interceptors/interceptors';
+import { LoadingComponent } from './components/shared/loading/loading.component';
+import { UploadDirective } from './directives/upload.directive';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,9 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     NavComponent,
     ModalComponent,
     UserComponent,
-    CarFormComponent
+    CarFormComponent,
+    LoadingComponent,
+    UploadDirective
   ],
   imports: [
     BrowserModule,
@@ -32,10 +37,11 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
     ReactiveFormsModule,
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
-    HttpClientModule
+    HttpClientModule,
+    NgxLoadingModule.forRoot({})
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true }
+    InterceptorsProviders
   ],
   bootstrap: [AppComponent]
 })
