@@ -17,6 +17,10 @@ import { NgxLoadingModule } from 'ngx-loading';
 import { InterceptorsProviders } from './interceptors/interceptors';
 import { LoadingComponent } from './components/shared/loading/loading.component';
 import { UploadDirective } from './directives/upload.directive';
+import { ListComponent } from './components/user/list/list.component';
+import { CardListTemplateComponent } from './components/shared/card-list-template/card-list-template.component';
+import { StarshipsComponent } from './components/starships/starships/starships.component';
+import { StarshipDetailComponent } from './components/starships/starship-detail/starship-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +32,11 @@ import { UploadDirective } from './directives/upload.directive';
     UserComponent,
     CarFormComponent,
     LoadingComponent,
-    UploadDirective
+    UploadDirective,
+    ListComponent,
+    CardListTemplateComponent,
+    StarshipsComponent,
+    StarshipDetailComponent
   ],
   imports: [
     BrowserModule,

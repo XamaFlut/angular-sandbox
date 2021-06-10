@@ -1,0 +1,33 @@
+<div class="container">
+    <div class="row">
+        <div class="card col-3 mb-2 me-1" *ngFor="let item of list; let i=index;">
+            <div class="card-body" *ngIf="entity=='Car'">
+                <img [src]="item.image_car" [alt]="item.name" class="card-img">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">{{ item.desc_excerpt }}</p>
+            </div>
+            <div class="card-body" *ngIf="entity=='User'">
+                <h5 class="card-title">{{ item.first_name }}</h5>
+                <p class="card-text">{{ item.last_name }}</p>
+                <p class="card-text">{{ item.phone }}</p>
+            </div>
+            <div class="card-body" *ngIf="entity=='Starship'">
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="card-title">{{ item.name }}</h5>
+                    </div>
+                    <div class="col-3 text-end">
+                        <button class="btn btn-success btn-sm" (click)="openStarship(item.url)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </div>
+                </div>
+                <p class="card-text">{{ item.manufacturer }}</p>
+                <p><i class="fa fa-pencil"></i> {{item.edited | date:'fullDate'}}</p>
+                <div class="btn btn-danger mb-1" *ngFor="let film of item.films; let i = index;">
+                    <a class="btn" [href]="film" target='_blank'>Film {{ i+1  }}</a>
+                </div>   
+            </div>
+        </div>
+    </div>
+</div>

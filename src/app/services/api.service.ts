@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class ApiService {
 
   baseUrl = 'https://test-marketplace-api.herokuapp.com/api/';
+  baseStarshipUrl = "https://swapi.dev/api/";
+
   constructor(
     public http: HttpClient
   ) { }
@@ -17,7 +19,10 @@ export class ApiService {
     carDetails: (slug) => `${this.baseUrl}car/${slug}`,
     userSignIn: `${this.baseUrl}user/signin`,
     carEdit: (slug) => `${this.baseUrl}car/edit/${slug}`,
-    imageUpload: `${this.baseUrl}car/img-upload`
+    imageUpload: `${this.baseUrl}car/img-upload`,
+    userList: `${this.baseUrl}user/list`,
+    starshipList: `${this.baseStarshipUrl}starships/`,
+    starshipDetails: (id) => `${this.baseStarshipUrl}starships/${id}/`
   }
 
   request(url: endpointType, method, urlParams?, payload?){
@@ -35,4 +40,7 @@ export type endpointType =
   "userSignIn" | 
   "carDetails" |
   "carEdit" |
-  "imageUpload";
+  "imageUpload" |
+  "userList" |
+  "starshipList" |
+  "starshipDetails";

@@ -32,7 +32,8 @@
 </div>
 
 <div class="container mt-3" *ngIf="showCard">
-  <div class="row">
+  <card-list-template [list]="filteredCarList" [entity]="'Car'" *ngIf="filteredCarList?.length>0"></card-list-template>
+  <!-- <div class="row">
     <div class="col-12 col-sm-4 mb-3" *ngFor="let car of filteredCarList; let i = index">
       <div class="card" [ngClass]="{
         'bg-dark text-white':currentTheme == 'dark',
@@ -51,7 +52,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
 
 <div class="container" *ngIf="!showCard">

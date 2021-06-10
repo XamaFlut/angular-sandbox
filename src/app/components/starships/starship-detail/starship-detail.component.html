@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{ starshipDetails?.name }}</h5>
+            <ng-container *ngFor="let key of starshipKeys">
+                <p class="card-text" *ngIf="!blacklist.includes(key)" [ngClass]="{'fw-bold': key === 'cost_in_credits'}">
+                    {{ labels[key] ? labels[key]: key }}: {{ starshipDetails[key] }}
+                </p>
+            </ng-container>
+
+            <!-- <p class="card-text">{{ starshipDetails?.manufacturer }}</p>
+            <p class="card-text">{{ starshipDetails?.length }} metres</p>
+            <p class="card-text">{{ starshipDetails?.passengers }} passengers</p>
+            <p class="card-text">{{ starshipDetails?.crew }} crew members</p>
+            <p class="card-text">Consumables: {{ starshipDetails?.consumables }}</p>
+            <p class="card-text">Class: {{ starshipDetails?.starship_class }}</p>
+            <p class="card-text">MAS: {{ starshipDetails?.max_atmosphering_speed }}</p>
+            <p class="card-text">Cargo Capacity: {{ starshipDetails?.cargo_capacity }}</p>
+            <p class="card-text">Hyperdrive Rating: {{ starshipDetails?.hyperdrive_rating }}</p>
+            <p class="card-text">Cost (Credits): {{ starshipDetails?.cost_in_credits }}</p> -->
+
+        </div>
+    </div>
+</div>
