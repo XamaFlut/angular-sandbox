@@ -18,4 +18,5 @@ export interface Car {
     currency: string;
     contact_phone: string;
     contact_email: string;
+    is_favourite: boolean;
 }

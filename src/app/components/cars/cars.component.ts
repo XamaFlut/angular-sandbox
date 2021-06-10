@@ -36,9 +36,12 @@ export class CarsComponent implements OnInit {
     // this.arrayMap();
     // this.arrayReducer();
     this.apiService.request('carList', 'get').subscribe( result => {
-      console.log(result);
       this.carList = result['data'];
       this.filteredCarList = this.carList;
+      const favourites = this.storageService.get('favourites');
+      if(favourites){
+        this.filteredCarList = this.carList.map(c => ({ ...c, is_favourite: favourites.Car.includes(c._id) }));
+      }
     });
   }
 

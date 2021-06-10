@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { StorageService } from '../../../services/storage.service';
 import { Starship } from '../../../models/starship';
 import { ApiService } from '../../../services/api.service';
 
@@ -12,7 +13,8 @@ export class StarshipsComponent implements OnInit {
   starships: Starship[] = [];
 
   constructor(
-    public apiService: ApiService
+    public apiService: ApiService,
+    public storageService: StorageService
   ) { }
 
   ngOnInit(): void {
@@ -22,7 +24,10 @@ export class StarshipsComponent implements OnInit {
   getStarships(){
     this.apiService.request('starshipList', 'get').subscribe(result => {
       this.starships = result['results'];
-      console.log('Starships: ', this.starships);
+      const favourites = this.storageService.get('favourites');
+      if(favourites){
+        this.starships = this.starships.map(s => ({ ...s, is_favourite: favourites.Starship.includes(s.url) }));
+      }
     });
   }
 
