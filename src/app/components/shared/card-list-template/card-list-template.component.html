@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="card col-3 mb-2" *ngFor="let item of list; let i=index;">
+        <div class="card col-3 mb-2" *ngFor="let item of list; let i=index;" [ngClass]="{'col-4': entity === 'Starship'}">
             <div class="card-body" *ngIf="entity=='Car'">
                 <img [src]="item.image_car" [alt]="item.name" class="card-img">
                 <div class="row">

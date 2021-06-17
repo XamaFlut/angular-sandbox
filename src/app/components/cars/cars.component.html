@@ -12,7 +12,7 @@
 <div class="container">
   <div class="row">
     <div class="col">
-      <button class="btn btn-success btn-sm" [routerLink]="['/car/add']">
+      <button *ngIf="checkLoggedIn()" class="btn btn-success btn-sm" [routerLink]="['/car/add']">
         <i class="fa fa-plus me-2"></i>
         Add Car
       </button>

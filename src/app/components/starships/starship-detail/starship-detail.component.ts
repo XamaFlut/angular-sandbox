@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Starship } from '../../../models/starship';
 import { ApiService } from '../../../services/api.service';
 
@@ -34,12 +34,21 @@ export class StarshipDetailComponent implements OnInit {
 
   constructor(
     public apiService: ApiService,
-    public activatedRoute: ActivatedRoute
+    public activatedRoute: ActivatedRoute,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
     this.starshipId = this.activatedRoute.snapshot.paramMap.get('id');
-    
+    console.log('Starship ID: ', this.starshipId);
+    this.router.events.subscribe((result) => {
+      console.log('Route result: ', result);
+      if(result instanceof NavigationEnd){
+        const id = result['url'].split('/')[2];
+        this.starshipId = id;
+        this.getStarship();
+      }
+    });
     this.getStarship();
   }
 

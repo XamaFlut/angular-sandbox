@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
-    public apiService: ApiService
+    public apiService: ApiService,
+    public router: Router
   ) { }
 
   ngOnInit(): void {
@@ -39,9 +41,11 @@ export class RegisterComponent implements OnInit {
   register(){
     this.registerForm.controls.confirm_password.setValue(undefined);
     console.log('Register Form:', this.registerForm.value);
-    // this.apiService.request('userRegister', 'post', null, this.registerForm.value).subscribe((result => {
-
-    // }));
+    this.apiService.request('userRegister', 'post', null, this.registerForm.value).subscribe((result => {
+      if(result.success){
+        this.router.navigate(['users']);
+      }
+    }));
   }
 
   passwordPeak(visible){

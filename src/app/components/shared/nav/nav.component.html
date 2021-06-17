@@ -15,7 +15,7 @@
           <li class="nav-item">
             <a class="nav-link" aria-current="page">Home</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item" *ngIf="permissionService.hasRole('admin')">
             <a class="nav-link" [routerLink]="['hello']" routerLinkActive="active">Hello</a>
           </li>
           <li class="nav-item">
@@ -39,8 +39,8 @@
           </button>
         </form>
         <div class="nav-item" *ngIf="username">
-          <span>Welcome {{ username }}!</span>
-          <button class="btn btn-outline-danger ms-2" (click)="logout()"><i class="fa fa-power-off"></i></button>
+          <span>Welcome {{ username }}! <i class="fa fa-star text-warning" *ngIf="permissionService.hasRole('admin')"></i> </span>
+          <button class="btn btn-outline-danger ms-2 rounded-circle" (click)="logout()"><i class="fa fa-power-off"></i></button>
         </div>
       </div>
     </div>

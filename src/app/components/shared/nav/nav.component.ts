@@ -4,6 +4,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { ApiService } from '../../../services/api.service';
 import { SettingsService } from '../../../services/settings.service';
 import Swal from 'sweetalert2';
+import { PermissionService } from '../../../services/permission.service';
 
 @Component({
   selector: 'app-nav',
@@ -20,7 +21,8 @@ export class NavComponent implements OnInit {
     public settingsService: SettingsService,
     public storageService: StorageService,
     public apiService: ApiService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public permissionService: PermissionService
   ) { }
 
   ngOnInit(): void {
@@ -53,8 +55,8 @@ export class NavComponent implements OnInit {
 
   logout(){
     this.username = '';
-    this.storageService.set('user', '');
-    this.storageService.set('token', '');
+    this.storageService.remove('user');
+    this.storageService.remove('token');
   }
 
 }

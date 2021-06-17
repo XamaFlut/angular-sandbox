@@ -102,4 +102,9 @@ export class CarsComponent implements OnInit {
     console.log("final: ", final);
 
   }
+
+  checkLoggedIn(){
+    const user = this.storageService.get('user');
+    return user !== null;
+  }
 }
