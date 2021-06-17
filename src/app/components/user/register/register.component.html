@@ -1,0 +1,99 @@
+<div class="container">
+    <div class="card mt-5 mb-5">
+        <div class="card-header">
+            <h4 class="card-title mb-0">Registration</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="registerForm">
+                <div class="form-group row">
+                    <label for="first_name" class="col-sm-2 col-form-label text-end">First Name<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="First Name" formControlName="first_name" 
+                        [ngClass]="{'is-invalid': registerForm.controls.first_name.invalid && registerForm.controls.first_name.dirty }">
+                        <span class="text-danger" *ngIf="registerForm.controls.first_name.invalid && registerForm.controls.first_name.dirty">
+                            First name is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="last_name" class="col-sm-2 col-form-label text-end">Last Name<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Last Name" formControlName="last_name" 
+                        [ngClass]="{'is-invalid': registerForm.controls.last_name.invalid && registerForm.controls.last_name.dirty }">
+                        <span class="text-danger" *ngIf="registerForm.controls.last_name.invalid && registerForm.controls.last_name.dirty">
+                            Last name is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label text-end">Username<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Username" formControlName="username" 
+                        [ngClass]="{'is-invalid': registerForm.controls.username.invalid && registerForm.controls.username.dirty }">
+                        <span class="text-danger" *ngIf="registerForm.controls.username.invalid && registerForm.controls.username.dirty">
+                            Username is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="phone" class="col-sm-2 col-form-label text-end">Phone<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Phone" formControlName="phone" 
+                        [ngClass]="{'is-invalid': registerForm.controls.phone.invalid && registerForm.controls.phone.dirty }">
+                        <span class="text-danger" *ngIf="registerForm.controls.phone.invalid && registerForm.controls.phone.dirty">
+                            Phone is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label text-end">Email<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <input type="text" class="form-control" placeholder="Email" formControlName="email" 
+                        [ngClass]="{'is-invalid': registerForm.controls.email.invalid && registerForm.controls.email.dirty }">
+                        <span class="text-danger" *ngIf="registerForm.controls.email.invalid && registerForm.controls.email.dirty">
+                            Email is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="password" class="col-sm-2 col-form-label text-end">Password<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input [type]="this.passwordVisible? 'text': 'password'" class="form-control" placeholder="Password" formControlName="password" 
+                                [ngClass]="{'is-invalid': registerForm.controls.password.invalid && registerForm.controls.password.dirty }">
+                            <span class="input-group-text">
+                                <i appPasswordPeak (onEyeClick)="passwordPeak($event)"></i>
+                            </span>
+                        </div>
+                        <span class="text-danger" *ngIf="registerForm.controls.password.invalid && registerForm.controls.password.dirty">
+                            Password is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="confirm_password" class="col-sm-2 col-form-label text-end">Confirm Password<sup class="text-danger">*</sup>:</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <input [type]="this.confirmPasswordVisible? 'text': 'password'" id="password" class="form-control" placeholder="Confirm Password" formControlName="confirm_password" 
+                            [ngClass]="{'is-invalid': registerForm.controls.confirm_password.invalid && registerForm.controls.confirm_password.dirty }">
+                            <span class="input-group-text">
+                                <i appPasswordPeak (onEyeClick)="confirmPasswordPeak($event)"></i>
+                            </span>
+                        </div>
+                        <span class="text-danger" *ngIf="registerForm.controls.confirm_password.invalid && registerForm.controls.confirm_password.dirty">
+                            Confirm Password is required.
+                        </span>
+                        <span class="text-danger" *ngIf="registerForm.controls.confirm_password.dirty && registerForm.errors?.notSame">
+                            Confirm Password does not match password.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-11 text-end">
+                        <button class="btn btn-success mb-2" [disabled]="registerForm.invalid" (click)="register()">Register</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

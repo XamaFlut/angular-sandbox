@@ -6,6 +6,7 @@ import { HelloWorldComponent } from './components/hello-world/hello-world.compon
 import { StarshipDetailComponent } from './components/starships/starship-detail/starship-detail.component';
 import { StarshipsComponent } from './components/starships/starships/starships.component';
 import { ListComponent } from './components/user/list/list.component';
+import { RegisterComponent } from './components/user/register/register.component';
 import { UserComponent } from './components/user/user.component';
 
 const routes: Routes = [
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'car/edit/:slug', component: CarFormComponent},
   { path:'users', component: ListComponent },
   { path: 'starships', component: StarshipsComponent },
-  { path: 'starships/:id', component: StarshipDetailComponent }
+  { path: 'starships/:id', component: StarshipDetailComponent },
+  { path: 'signup', component: RegisterComponent }
 ];
 
 @NgModule({

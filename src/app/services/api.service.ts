@@ -22,7 +22,8 @@ export class ApiService {
     imageUpload: `${this.baseUrl}car/img-upload`,
     userList: `${this.baseUrl}user/list`,
     starshipList: `${this.baseStarshipUrl}starships/`,
-    starshipDetails: (id) => `${this.baseStarshipUrl}starships/${id}/`
+    starshipDetails: (id) => `${this.baseStarshipUrl}starships/${id}/`,
+    userRegister: `${this.baseUrl}user/signup`
   }
 
   request(url: endpointType, method, urlParams?, payload?){
@@ -43,4 +44,5 @@ export type endpointType =
   "imageUpload" |
   "userList" |
   "starshipList" |
-  "starshipDetails";
+  "starshipDetails" |
+  "userRegister";

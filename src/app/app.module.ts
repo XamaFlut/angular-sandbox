@@ -21,6 +21,8 @@ import { ListComponent } from './components/user/list/list.component';
 import { CardListTemplateComponent } from './components/shared/card-list-template/card-list-template.component';
 import { StarshipsComponent } from './components/starships/starships/starships.component';
 import { StarshipDetailComponent } from './components/starships/starship-detail/starship-detail.component';
+import { RegisterComponent } from './components/user/register/register.component';
+import { PasswordPeakDirective } from './directives/password-peak.directive';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { StarshipDetailComponent } from './components/starships/starship-detail/
     ListComponent,
     CardListTemplateComponent,
     StarshipsComponent,
-    StarshipDetailComponent
+    StarshipDetailComponent,
+    RegisterComponent,
+    PasswordPeakDirective
   ],
   imports: [
     BrowserModule,
