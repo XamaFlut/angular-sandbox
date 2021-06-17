@@ -19,7 +19,16 @@
                 <p class="card-text">{{ item.desc_excerpt }}</p>
             </div>
             <div class="card-body" *ngIf="entity=='User'">
-                <h5 class="card-title">{{ item.first_name }}</h5>
+                <div class="row">
+                    <div class="col-9">
+                        <h5 class="card-title">{{ item.first_name }}</h5>
+                    </div>
+                    <div class="col-3 text-end" *ngIf="permissionService.hasRole('admin') || permissionService.isCurrentUser(item._id)">
+                        <button class="btn btn-success btn-sm" (click)="editUser(item._id)">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </div>
+                </div>
                 <p class="card-text">{{ item.last_name }}</p>
                 <div class="row">
                     <div class="col-9">

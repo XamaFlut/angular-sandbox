@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { StorageService } from '../../../services/storage.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { PermissionService } from '../../../services/permission.service';
 
 @Component({
   selector: 'card-list-template',
@@ -15,7 +16,8 @@ export class CardListTemplateComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public storageService: StorageService
+    public storageService: StorageService,
+    public permissionService: PermissionService
   ) { }
 
   ngOnInit(): void {
@@ -61,5 +63,10 @@ export class CardListTemplateComponent implements OnInit {
     if(this.entity == 'Starship'){
       this.list.find(i => i.url == id).is_favourite = isFavourite;
     }
+  }
+
+  editUser(id){
+    console.log(id);
+    this.router.navigate(['/users/', id]);
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -13,14 +13,18 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   passwordVisible = false;
   confirmPasswordVisible = false;
+  userId;
 
   constructor(
     public formBuilder: FormBuilder,
     public apiService: ApiService,
-    public router: Router
+    public router: Router,
+    public activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
+    this.userId = this.activatedRoute.snapshot.paramMap.get('id');
+
     this.registerForm = this.formBuilder.group({
       username: ['', Validators.required],
       email: ['', Validators.required],
@@ -30,6 +34,16 @@ export class RegisterComponent implements OnInit {
       password: ['', Validators.required],
       confirm_password: ['']
     },{ validators: this.checkPasswords });
+
+    if(this.userId){
+      this.getUser();
+      this.registerForm = this.formBuilder.group({
+        username: ['', Validators.required],
+        email: ['', Validators.required],
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        phone: ['', Validators.required]});
+    }
   }
 
   checkPasswords(group: FormGroup){
@@ -53,6 +67,17 @@ export class RegisterComponent implements OnInit {
   }
   confirmPasswordPeak(visible){
     this.confirmPasswordVisible = visible;
+  }
+
+  getUser(){
+    this.apiService.request('userList', 'get').subscribe((result) => {
+      const user = result['data'].find(u => u._id === this.userId);
+      this.registerForm.patchValue(user);
+    });
+  }
+
+  saveUser(){
+    console.log('Save user: ', this.registerForm.value);
   }
 
 }

@@ -9,6 +9,7 @@ import { ListComponent } from './components/user/list/list.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { UserComponent } from './components/user/user.component';
 import { AuthGuard } from './guards/auth.guard';
+import { CurrentUserOrAdminGuard } from './guards/current-user-or-admin.guard';
 import { RoleGuard } from './guards/role.guard';
 
 const routes: Routes = [
@@ -22,7 +23,8 @@ const routes: Routes = [
     children: [ 
       { path: ':id', component: StarshipDetailComponent }
     ]},
-  { path: 'signup', component: RegisterComponent }
+  { path: 'signup', component: RegisterComponent },
+  { path: 'users/:id', component: RegisterComponent , canActivate: [ CurrentUserOrAdminGuard ] }
 ];
 
 @NgModule({
