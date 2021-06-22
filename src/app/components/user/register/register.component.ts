@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { ApiService } from '../../../services/api.service';
 
 @Component({
@@ -31,25 +32,30 @@ export class RegisterComponent implements OnInit {
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
       phone: ['', Validators.required],
-      password: ['', Validators.required],
+      password: [''],
       confirm_password: ['']
-    },{ validators: this.checkPasswords });
+    },{ validators: [this.checkPasswords.bind(this), this.passwordRequired.bind(this) ]});
 
     if(this.userId){
       this.getUser();
-      this.registerForm = this.formBuilder.group({
-        username: ['', Validators.required],
-        email: ['', Validators.required],
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        phone: ['', Validators.required]});
     }
   }
 
   checkPasswords(group: FormGroup){
-    const password = group.get('password').value;
-    const confirmPassword = group.get('confirm_password').value;
-    return password === confirmPassword ? null : { notSame: true };
+    if(!this.userId){
+      const password = group.get('password').value;
+      const confirmPassword = group.get('confirm_password').value;
+      return password === confirmPassword ? null : { notSame: true };
+    }
+    return null;
+  }
+
+  passwordRequired(group: FormGroup){
+    if(!this.userId){
+      const password = group.get('password').value;
+      return password !== ''? null: { passwordEmpty: true };
+    }
+    return null;
   }
 
   register(){
@@ -78,6 +84,14 @@ export class RegisterComponent implements OnInit {
 
   saveUser(){
     console.log('Save user: ', this.registerForm.value);
+    this.registerForm.controls.confirm_password.setValue(undefined);
+    this.registerForm.controls.password.setValue(undefined);
+    this.apiService.request('userEdit', 'put', this.userId, this.registerForm.value).subscribe((result => {
+      if(result){
+        Swal.fire("Nice", "User info is up to date!", 'success');
+        this.router.navigate(['users']);
+      }
+    }));
   }
 
 }

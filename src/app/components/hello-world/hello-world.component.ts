@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { roundedDecorator } from '../../decorators/roundedDecorator';
 import { environment } from '../../../environments/environment';
 import { execTimeDecorator } from '../../decorators/execTimeDecorator';
+import { confirmable } from '../../decorators/confirmableDecorator';
 
 @Component({
   selector: 'app-hello-world',
@@ -113,6 +114,13 @@ export class HelloWorldComponent implements OnInit {
     //this.longRunningMethod();
   }
 
+  @confirmable({ 
+    title: 'Toggle?',
+    denyButtonText:'Nope',
+    toast: true,
+    timer: 3000,
+    timerProgressBar: true
+  })
   toggleCard(){
     this.showCard= !this.showCard;
   }

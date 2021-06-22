@@ -23,7 +23,8 @@ export class ApiService {
     userList: `${this.baseUrl}user/list`,
     starshipList: `${this.baseStarshipUrl}starships/`,
     starshipDetails: (id) => `${this.baseStarshipUrl}starships/${id}/`,
-    userRegister: `${this.baseUrl}user/signup`
+    userRegister: `${this.baseUrl}user/signup`,
+    userEdit: (id) => `${this.baseUrl}user/edit/${id}`
   }
 
   request(url: endpointType, method, urlParams?, payload?){
@@ -45,4 +46,5 @@ export type endpointType =
   "userList" |
   "starshipList" |
   "starshipDetails" |
-  "userRegister";
+  "userRegister" |
+  "userEdit";
