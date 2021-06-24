@@ -1,3 +1,19 @@
-<app-nav></app-nav>
+
+<ng-template #chatTemplate>
+    <div class="modal-header">
+        <h5 class="modal-title">New Message</h5>
+        <button class="input-group-text" (click)="modalRef.hide()">
+            <i class="fa fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body">
+        <app-chat [newMessage]="newMessage"></app-chat>
+    </div>
+    <button class="btn" (click)="navigateToChat()">
+        Go to chat
+    </button>
+</ng-template><app-nav></app-nav>
 <router-outlet></router-outlet>
 <app-loading></app-loading>
+
+

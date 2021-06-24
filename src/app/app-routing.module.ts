@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CarFormComponent } from './components/cars/car-form/car-form.component';
 import { CarsComponent } from './components/cars/cars.component';
+import { ChatComponent } from './components/chat/chat.component';
 import { HelloWorldComponent } from './components/hello-world/hello-world.component';
 import { StarshipDetailComponent } from './components/starships/starship-detail/starship-detail.component';
 import { StarshipsComponent } from './components/starships/starships/starships.component';
@@ -24,7 +25,8 @@ const routes: Routes = [
       { path: ':id', component: StarshipDetailComponent }
     ]},
   { path: 'signup', component: RegisterComponent },
-  { path: 'users/:id', component: RegisterComponent , canActivate: [ CurrentUserOrAdminGuard ] }
+  { path: 'users/:id', component: RegisterComponent , canActivate: [ CurrentUserOrAdminGuard ] },
+  { path: 'chat', component: ChatComponent, canActivate: [ AuthGuard] }
 ];
 
 @NgModule({

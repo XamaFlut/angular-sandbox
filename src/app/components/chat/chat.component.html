@@ -1,0 +1,38 @@
+<div class="container">
+    <div class="card">
+        <div>Messages</div>
+        <div *ngFor="let message of messages">
+            <p [style.color]="message.color" [style.background-color]="message.backgroundColor">{{message.user}}: {{ message.message }}</p>
+        </div>
+        <div class="card-footer">
+            <input type="text" [(ngModel)]="message.message">
+            <button class="btn btn-success" (click)="sendMessage()">send</button>
+        </div>
+
+        <div>
+            text:<select [(ngModel)]="selectedColor">
+                <option value="pink">Pink</option>
+                <option value="black">Black</option>
+                <option value="brown">Brown</option>
+                <option value="purple">Purple</option>
+                <option value="yellow">Yellow</option>
+            </select>
+            bg:<select [(ngModel)]="selectedBackgroundColor">
+                <option value="white">White</option>
+                <option value="yellow">Yellow</option>
+                <option value="black">Black</option>
+                <option value="blue">Blue</option>
+                <option value="red">Red</option>
+            </select>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- <ul>
+        <li *ngFor="let message of list$ | async">
+            <p [style.color]="message.color" [style.background-color]="message.backgroundColor">{{message.user}}: {{ message.message }}</p>
+        </li>
+    </ul> -->
+    
+</div>

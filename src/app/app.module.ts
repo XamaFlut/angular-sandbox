@@ -23,6 +23,8 @@ import { StarshipsComponent } from './components/starships/starships/starships.c
 import { StarshipDetailComponent } from './components/starships/starship-detail/starship-detail.component';
 import { RegisterComponent } from './components/user/register/register.component';
 import { PasswordPeakDirective } from './directives/password-peak.directive';
+import { ChatComponent } from './components/chat/chat.component';
+import { ChatModalComponent } from './components/shared/chat-modal/chat-modal.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +42,9 @@ import { PasswordPeakDirective } from './directives/password-peak.directive';
     StarshipsComponent,
     StarshipDetailComponent,
     RegisterComponent,
-    PasswordPeakDirective
+    PasswordPeakDirective,
+    ChatComponent,
+    ChatModalComponent
   ],
   imports: [
     BrowserModule,
