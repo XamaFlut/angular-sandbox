@@ -78,6 +78,9 @@
                 <button class="btn btn-primary btn-sm ms-2" [tooltip]="'Edit'" [routerLink]="['/car/edit/',car.slug]">
                   <i class="fa fa-pencil"></i>
                 </button>
+                <button class="btn btn-success btn-sm mx-2" [tooltip]="'Add to cart'" (click)="addToCart(car)">
+                  <i class="fa fa-cart-plus"></i>
+                </button>
             </td>
           </tr>
         </tbody>

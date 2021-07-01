@@ -25,6 +25,9 @@ import { RegisterComponent } from './components/user/register/register.component
 import { PasswordPeakDirective } from './directives/password-peak.directive';
 import { ChatComponent } from './components/chat/chat.component';
 import { ChatModalComponent } from './components/shared/chat-modal/chat-modal.component';
+import { StoreModule } from '@ngrx/store';
+import { reducer } from './store/reducers/cart.reducer';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +47,8 @@ import { ChatModalComponent } from './components/shared/chat-modal/chat-modal.co
     RegisterComponent,
     PasswordPeakDirective,
     ChatComponent,
-    ChatModalComponent
+    ChatModalComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,
@@ -54,7 +58,8 @@ import { ChatModalComponent } from './components/shared/chat-modal/chat-modal.co
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
     HttpClientModule,
-    NgxLoadingModule.forRoot({})
+    NgxLoadingModule.forRoot({}),
+    StoreModule.forRoot({ cart:reducer })
   ],
   providers: [
     InterceptorsProviders

@@ -4,6 +4,8 @@ import { StorageService } from '../../services/storage.service';
 import { Car } from '../../models/car';
 import { SettingsService } from '../../services/settings.service';
 import { ApiService } from 'src/app/services/api.service';
+import { Store } from '@ngrx/store';
+import * as Cart from '../../store/actions/cart.action';
 
 @Component({
   selector: 'app-cars',
@@ -14,7 +16,7 @@ export class CarsComponent implements OnInit {
 
   carList: Car[];
   filteredCarList:Car[] = [];
-  showCard=true;
+  showCard=false;
   searchText:string;
   toModal = "Vat 18%";
   currentTheme = 'light';
@@ -23,7 +25,8 @@ export class CarsComponent implements OnInit {
     public dataService: DataService,
     public storageService: StorageService,
     public settingsService: SettingsService,
-    public apiService: ApiService
+    public apiService: ApiService,
+    private store: Store<any>
     ) { 
   }
 
@@ -106,5 +109,10 @@ export class CarsComponent implements OnInit {
   checkLoggedIn(){
     const user = this.storageService.get('user');
     return user !== null;
+  }
+
+  addToCart(car){
+    this.store.dispatch(new Cart.AddCar(car));
+    console.log('Added to cart:', car);
   }
 }
